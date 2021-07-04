@@ -1,0 +1,59 @@
+﻿@model EURO2020.Models.Team
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>More info about @Model.Country</h2>
+
+<div>
+    <h4>Team</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ImgURL)
+        </dt>
+        <dd>
+            <img style="width:100px;height:60px" src="@Model.ImgURL" />
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Country)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Country)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Points)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Points)
+        </dd>
+
+    </dl>
+</div>
+
+<div>
+    <h6>@Model.Country EURO2020 squad</h6>
+    @foreach (var player in Model.players)
+    {
+        <li>
+            <a href="/Players/Details/@player.Id">@player.Number | @player.FullName</a>
+        </li>
+    }
+</div>
+@if (User.IsInRole("Administrator") || User.IsInRole("Editor"))
+{
+    <a href="/Teams/InsertNewPlayer/@Model.id">Insert player to team</a>
+}
+
+
+<p>
+    @if (User.IsInRole("Administrator") || User.IsInRole("Editor"))
+    {
+        @Html.ActionLink("Edit", "Edit", new { id = Model.id })
+    }
+    @Html.ActionLink("Back to List", "Index")
+</p>

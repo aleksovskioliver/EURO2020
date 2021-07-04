@@ -1,0 +1,23 @@
+﻿@model EURO2020.Models.NationalTeam
+
+@{
+    ViewBag.Title = "InsertNewPlayer";
+}
+
+<h2>Insert new player for the national team: @Model.Team.Country</h2>
+
+@using (Html.BeginForm("InsertNewPlayer", "Teams"))
+{
+    <div class="form-group">
+        @Html.DropDownListFor(m => m.selectedPlayerId,
+                           new SelectList(Model.Players,"Id","FullName"),
+                           new { @class = "form-control" })
+        @Html.HiddenFor(m=>m.TeamId)
+    </div>
+
+    <div class="form-group">
+        <button type="submit">Add the player to his national team</button>
+    </div>
+            
+}
+
