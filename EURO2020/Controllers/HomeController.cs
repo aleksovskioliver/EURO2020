@@ -26,5 +26,10 @@ namespace EURO2020.Controllers
 
             return View();
         }
+        public ActionResult Schedule()
+        {
+            ViewBag.Message = "EURO2020 Schedule";
+            return View();
+        }
     }
 }

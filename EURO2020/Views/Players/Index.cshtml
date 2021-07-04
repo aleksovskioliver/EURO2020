@@ -58,8 +58,8 @@
                     @Html.ActionLink("Details", "Details", new { id = item.Id }, new { @class = "form-control" })
                     @if (User.IsInRole("Administrator"))
                     {
-                        @Html.ActionLink("Delete", "Delete", new { id = item.Id }, new { @class = "form-control" })
-                    }
+                         <button data-team-id="@item.Id" class="form-control js-delete">Delete</button>                 
+                     }
                 </td>
             </tr>
         }
@@ -69,7 +69,24 @@
 @section scripts{
     <script>
         $(document).ready(function () {
-            $("#playerTable").DataTable();
+            var table = $("#playerTable").DataTable();
+            $("#playerTable .js-delete").on("click", function () {
+                var button = $(this);
+                bootbox.confirm("Do you want to delete this player?", function (result) {
+                    if (result) {
+                        $.ajax({
+                            url: "/api/PlayersApi/" + button.attr("data-team-id"),
+                            method: "DELETE",
+                            success: function () {
+                                table.row(button.parents("tr")).remove().draw();
+                            },
+                            error: function (err) {
+                                console.log(err);
+                            }
+                        });
+                    }
+                });
+            });
         });
     </script>
 }

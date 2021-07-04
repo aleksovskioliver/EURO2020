@@ -52,6 +52,24 @@ namespace EURO2020.Controllers
             db.SaveChanges();
             return View("Index", db.Teams.ToList());
         }
+        public ActionResult RemovePlayer(int id)
+        {
+            NationalTeam model = new NationalTeam();
+            model.selectedPlayerId = id;
+         //   model.Players = db.Teams.Find(id);
+            model.Players = db.Players.ToList();
+            ViewBag.Players = db.Players.ToList();
+            return View(model);
+        }
+        [HttpPost]
+        public ActionResult xc(NationalTeam model)
+        {
+            var player = db.Players.FirstOrDefault(m => m.Id == model.selectedPlayerId);
+            var team = db.Teams.FirstOrDefault(m => m.id == model.TeamId);
+            team.players.Add(player);
+            db.SaveChanges();
+            return View("Index", db.Teams.ToList());
+        }
 
         // GET: Teams/Create
         public ActionResult Create()

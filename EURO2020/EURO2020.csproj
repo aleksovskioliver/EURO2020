@@ -180,6 +180,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\PlayersApiController.cs" />
     <Compile Include="Controllers\PlayersController.cs" />
     <Compile Include="Controllers\Teams1Controller.cs" />
     <Compile Include="Controllers\TeamsController.cs" />
@@ -514,6 +515,7 @@
     <Content Include="Views\Players\Index.cshtml" />
     <Content Include="Views\Teams\InsertNewPlayer.cshtml" />
     <Content Include="Views\Account\AddUserToRole.cshtml" />
+    <Content Include="Views\Home\Schedule.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
